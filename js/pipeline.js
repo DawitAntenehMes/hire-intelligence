@@ -5,18 +5,44 @@
 
 const API_BASE = "/api"; // Change to your deployed backend URL if separate
 
+function createRequestId() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return window.crypto.randomUUID();
+  }
+  return `req-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+}
+
 /**
  * Run the full 4-agent pipeline.
  * Calls POST /api/pipeline
  */
 async function callPipeline(jd, candidates, scenario, urgencyWeeks) {
+  const requestId = createRequestId();
+  const startedAt = Date.now();
+  console.info("[pipeline] request.start", {
+    requestId,
+    scenarioId: scenario?.id,
+    candidateCount: candidates.length,
+    urgencyWeeks
+  });
+
   const res = await fetch(`${API_BASE}/pipeline`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-Request-Id": requestId
+    },
     body: JSON.stringify({ jd, candidates, scenario, urgencyWeeks })
   });
 
   const json = await res.json();
+
+  console.info("[pipeline] request.end", {
+    requestId,
+    status: res.status,
+    success: Boolean(json.success),
+    durationMs: Date.now() - startedAt
+  });
 
   if (!json.success) {
     throw new Error(json.error || "Pipeline failed at stage: " + (json.stage || "unknown"));
@@ -30,13 +56,32 @@ async function callPipeline(jd, candidates, scenario, urgencyWeeks) {
  * Calls POST /api/pipeline/rerun
  */
 async function callRerun(adaptedJD, sourcingResult, candidates, urgencyWeeks) {
+  const requestId = createRequestId();
+  const startedAt = Date.now();
+  console.info("[pipeline-rerun] request.start", {
+    requestId,
+    criteriaCount: adaptedJD?.adaptedCriteria?.length || 0,
+    candidateCount: candidates.length,
+    urgencyWeeks
+  });
+
   const res = await fetch(`${API_BASE}/pipeline/rerun`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-Request-Id": requestId
+    },
     body: JSON.stringify({ adaptedJD, sourcingResult, candidates, urgencyWeeks })
   });
 
   const json = await res.json();
+
+  console.info("[pipeline-rerun] request.end", {
+    requestId,
+    status: res.status,
+    success: Boolean(json.success),
+    durationMs: Date.now() - startedAt
+  });
 
   if (!json.success) {
     throw new Error(json.error || "Rerun failed");

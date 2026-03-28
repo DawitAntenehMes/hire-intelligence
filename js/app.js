@@ -151,7 +151,7 @@ async function runPipeline() {
       console.warn("API unavailable, using demo data:", apiErr.message);
       // Simulate loading time
       await new Promise(r => setTimeout(r, 2500));
-      result = DEMO_RESULT;
+      return;
     }
 
     // Clear timers

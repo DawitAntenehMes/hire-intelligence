@@ -10,6 +10,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const OpenAI = require("openai");
 
 // ── Load env vars from .env file ─────────────────────────────────────────────
@@ -39,16 +40,65 @@ const grok = new OpenAI({
   baseURL: "https://api.x.ai/v1"
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
+const GROK_MODEL = process.env.GROK_MODEL || "grok-3-latest";
+
+function logEvent(level, message, meta = {}) {
+  const entry = {
+    ts: new Date().toISOString(),
+    level,
+    message,
+    ...meta
+  };
+
+  const line = JSON.stringify(entry);
+  if (level === "error") {
+    console.error(line);
+  } else if (level === "warn") {
+    console.warn(line);
+  } else {
+    console.log(line);
+  }
+}
+
+function createRequestLogger(req, url) {
+  const requestId = req.headers["x-request-id"] || crypto.randomUUID();
+  const baseMeta = {
+    requestId,
+    method: req.method,
+    path: url.pathname
+  };
+
+  return {
+    requestId,
+    info(message, meta = {}) {
+      logEvent("info", message, { ...baseMeta, ...meta });
+    },
+    warn(message, meta = {}) {
+      logEvent("warn", message, { ...baseMeta, ...meta });
+    },
+    error(message, meta = {}) {
+      logEvent("error", message, { ...baseMeta, ...meta });
+    }
+  };
+}
+
+function getHttpStatusFromError(err) {
+  const status = err?.status || err?.statusCode || err?.response?.status;
+  if (Number.isInteger(status) && status >= 400 && status <= 599) {
+    return status;
+  }
+  return 500;
+}
 
 // ── MIME types for static files ───────────────────────────────────────────────
 const MIME = {
   ".html": "text/html",
-  ".css":  "text/css",
-  ".js":   "application/javascript",
+  ".css": "text/css",
+  ".js": "application/javascript",
   ".json": "application/json",
-  ".ico":  "image/x-icon",
-  ".png":  "image/png",
+  ".ico": "image/x-icon",
+  ".png": "image/png",
 };
 
 // ── Utility: parse request body ───────────────────────────────────────────────
@@ -88,13 +138,19 @@ function safeParseJSON(text, agentName) {
 }
 
 // ── Utility: retry wrapper ────────────────────────────────────────────────────
-async function withRetry(fn, retries = 2, delayMs = 1000) {
+async function withRetry(fn, retries = 2, delayMs = 1000, onRetry) {
   let lastErr;
   for (let i = 0; i <= retries; i++) {
     try { return await fn(); }
     catch (err) {
       lastErr = err;
-      if (i < retries) await new Promise(r => setTimeout(r, delayMs * 2 ** i));
+      if (i < retries) {
+        const nextDelayMs = delayMs * 2 ** i;
+        if (onRetry) {
+          onRetry(err, i + 1, nextDelayMs);
+        }
+        await new Promise(r => setTimeout(r, nextDelayMs));
+      }
     }
   }
   throw lastErr;
@@ -218,10 +274,11 @@ Rules:
 // AGENT FUNCTIONS
 // ────────────────────────────────────────────────────────────────────────────
 
-async function runAgent1(jd, scenarioDescription) {
+async function runAgent1(jd, scenarioDescription, logger) {
+  const startedAt = Date.now();
   return withRetry(async () => {
     const response = await grok.chat.completions.create({
-      model: "grok-2-latest",
+      model: GROK_MODEL,
       max_tokens: 1000,
       system: AGENT1_PROMPT,
       messages: [{ role: "user", content: `JOB DESCRIPTION:\n${jd}\n\nBUSINESS SCENARIO:\n${scenarioDescription}` }]
@@ -237,13 +294,23 @@ async function runAgent1(jd, scenarioDescription) {
       })),
       scenarioSummary: raw.scenario_summary
     };
+  }, 2, 1000, (err, attempt, nextDelayMs) => {
+    logger?.warn("agent1.retry", {
+      attempt,
+      nextDelayMs,
+      error: err.message
+    });
+  }).then(result => {
+    logger?.info("agent1.completed", { durationMs: Date.now() - startedAt });
+    return result;
   });
 }
 
-async function runAgent2(adaptedJD, candidates, urgencyWeeks) {
+async function runAgent2(adaptedJD, candidates, urgencyWeeks, logger) {
+  const startedAt = Date.now();
   return withRetry(async () => {
     const response = await grok.chat.completions.create({
-      model: "grok-2-latest",
+      model: GROK_MODEL,
       max_tokens: 1000,
       system: AGENT2_PROMPT,
       messages: [{
@@ -271,13 +338,23 @@ async function runAgent2(adaptedJD, candidates, urgencyWeeks) {
       },
       recommendationReasoning: raw.recommendation_reasoning
     };
+  }, 2, 1000, (err, attempt, nextDelayMs) => {
+    logger?.warn("agent2.retry", {
+      attempt,
+      nextDelayMs,
+      error: err.message
+    });
+  }).then(result => {
+    logger?.info("agent2.completed", { durationMs: Date.now() - startedAt });
+    return result;
   });
 }
 
-async function runAgent3(adaptedJD, candidates, urgencyWeeks) {
+async function runAgent3(adaptedJD, candidates, urgencyWeeks, logger) {
+  const startedAt = Date.now();
   return withRetry(async () => {
     const response = await grok.chat.completions.create({
-      model: "grok-2-latest",
+      model: GROK_MODEL,
       max_tokens: 2000,
       system: AGENT3_PROMPT,
       messages: [{
@@ -305,13 +382,23 @@ async function runAgent3(adaptedJD, candidates, urgencyWeeks) {
         urgencyMismatch: c.urgency_mismatch ?? false
       }))
     };
+  }, 2, 1000, (err, attempt, nextDelayMs) => {
+    logger?.warn("agent3.retry", {
+      attempt,
+      nextDelayMs,
+      error: err.message
+    });
+  }).then(result => {
+    logger?.info("agent3.completed", { durationMs: Date.now() - startedAt });
+    return result;
   });
 }
 
-async function runAgent4(adaptedJD, sourcingResult, rankings) {
+async function runAgent4(adaptedJD, sourcingResult, rankings, logger) {
+  const startedAt = Date.now();
   return withRetry(async () => {
     const response = await grok.chat.completions.create({
-      model: "grok-2-latest",
+      model: GROK_MODEL,
       max_tokens: 1200,
       system: AGENT4_PROMPT,
       messages: [{
@@ -334,6 +421,15 @@ async function runAgent4(adaptedJD, sourcingResult, rankings) {
       confidenceReasoning: raw.confidence_reasoning,
       redFlags: raw.red_flags ?? []
     };
+  }, 2, 1000, (err, attempt, nextDelayMs) => {
+    logger?.warn("agent4.retry", {
+      attempt,
+      nextDelayMs,
+      error: err.message
+    });
+  }).then(result => {
+    logger?.info("agent4.completed", { durationMs: Date.now() - startedAt });
+    return result;
   });
 }
 
@@ -344,13 +440,22 @@ async function runAgent4(adaptedJD, sourcingResult, rankings) {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   const method = req.method;
+  const logger = createRequestLogger(req, url);
+  const requestStart = Date.now();
+
+  logger.info("http.request.received", {
+    query: url.search,
+    userAgent: req.headers["user-agent"] || "unknown"
+  });
 
   // ── CORS headers ──────────────────────────────────────────────────────────
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("X-Request-Id", logger.requestId);
 
   if (method === "OPTIONS") {
+    logger.info("http.request.options");
     res.writeHead(204);
     res.end();
     return;
@@ -358,6 +463,7 @@ const server = http.createServer(async (req, res) => {
 
   // ── API: GET /api/health ──────────────────────────────────────────────────
   if (url.pathname === "/api/health" && method === "GET") {
+    logger.info("health.ok");
     return sendJSON(res, 200, { status: "ok", timestamp: new Date().toISOString() });
   }
 
@@ -369,31 +475,47 @@ const server = http.createServer(async (req, res) => {
       const { jd, candidates, scenario, urgencyWeeks } = body;
 
       if (!jd || !candidates?.length || !scenario || !urgencyWeeks) {
+        logger.warn("pipeline.validation_failed", {
+          hasJD: Boolean(jd),
+          candidateCount: Array.isArray(candidates) ? candidates.length : 0,
+          hasScenario: Boolean(scenario),
+          urgencyWeeks: urgencyWeeks ?? null
+        });
         return sendJSON(res, 400, { success: false, error: "Missing required fields", stage: "unknown" });
       }
 
-      console.log(`[Pipeline] Starting — scenario: ${scenario.label}, candidates: ${candidates.length}, urgency: ${urgencyWeeks}w`);
+      logger.info("pipeline.started", {
+        scenarioId: scenario.id,
+        scenarioLabel: scenario.label,
+        candidateCount: candidates.length,
+        urgencyWeeks,
+        jdChars: String(jd).length
+      });
 
-      const agent1 = await runAgent1(jd, scenario.description);
-      console.log("[Agent 1] Done");
+      const agent1 = await runAgent1(jd, scenario.description, logger);
 
-      const agent2 = await runAgent2(agent1, candidates, urgencyWeeks);
-      console.log("[Agent 2] Done");
+      const agent2 = await runAgent2(agent1, candidates, urgencyWeeks, logger);
 
-      const agent3 = await runAgent3(agent1, candidates, urgencyWeeks);
-      console.log("[Agent 3] Done");
+      const agent3 = await runAgent3(agent1, candidates, urgencyWeeks, logger);
 
-      const agent4 = await runAgent4(agent1, agent2, agent3);
-      console.log("[Agent 4] Done");
+      const agent4 = await runAgent4(agent1, agent2, agent3, logger);
 
       const durationMs = Date.now() - start;
-      console.log(`[Pipeline] Complete in ${durationMs}ms`);
+      logger.info("pipeline.completed", { durationMs });
 
       return sendJSON(res, 200, { success: true, data: { agent1, agent2, agent3, agent4 }, durationMs });
 
     } catch (err) {
-      console.error("[Pipeline Error]", err.message);
-      return sendJSON(res, 500, { success: false, error: err.message, stage: err.stage || "unknown" });
+      const statusCode = getHttpStatusFromError(err);
+      logger.error("pipeline.failed", {
+        stage: err.stage || "unknown",
+        statusCode,
+        error: err.message,
+        stack: err.stack
+      });
+      return sendJSON(res, statusCode, { success: false, error: err.message, stage: err.stage || "unknown" });
+    } finally {
+      logger.info("http.request.finished", { durationMs: Date.now() - requestStart });
     }
   }
 
@@ -403,14 +525,30 @@ const server = http.createServer(async (req, res) => {
       const body = await parseBody(req);
       const { adaptedJD, sourcingResult, candidates, urgencyWeeks } = body;
 
-      const agent3 = await runAgent3(adaptedJD, candidates, urgencyWeeks);
-      const agent4 = await runAgent4(adaptedJD, sourcingResult, agent3);
+      logger.info("pipeline.rerun.started", {
+        candidateCount: Array.isArray(candidates) ? candidates.length : 0,
+        urgencyWeeks: urgencyWeeks ?? null,
+        criteriaCount: adaptedJD?.adaptedCriteria?.length ?? 0
+      });
+
+      const agent3 = await runAgent3(adaptedJD, candidates, urgencyWeeks, logger);
+      const agent4 = await runAgent4(adaptedJD, sourcingResult, agent3, logger);
+
+      logger.info("pipeline.rerun.completed");
 
       return sendJSON(res, 200, { success: true, data: { agent3, agent4 } });
 
     } catch (err) {
-      console.error("[Rerun Error]", err.message);
-      return sendJSON(res, 500, { success: false, error: err.message, stage: err.stage || "unknown" });
+      const statusCode = getHttpStatusFromError(err);
+      logger.error("pipeline.rerun.failed", {
+        stage: err.stage || "unknown",
+        statusCode,
+        error: err.message,
+        stack: err.stack
+      });
+      return sendJSON(res, statusCode, { success: false, error: err.message, stage: err.stage || "unknown" });
+    } finally {
+      logger.info("http.request.finished", { durationMs: Date.now() - requestStart });
     }
   }
 
@@ -420,16 +558,37 @@ const server = http.createServer(async (req, res) => {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
+      logger.warn("static.not_found", { filePath: url.pathname });
       res.writeHead(404, { "Content-Type": "text/plain" });
       return res.end("Not found");
     }
     const ext = path.extname(filePath);
     res.writeHead(200, { "Content-Type": MIME[ext] || "text/plain" });
     res.end(data);
+    logger.info("static.served", {
+      filePath: url.pathname,
+      bytes: data.length,
+      contentType: MIME[ext] || "text/plain",
+      durationMs: Date.now() - requestStart
+    });
+  });
+});
+
+process.on("unhandledRejection", reason => {
+  logEvent("error", "process.unhandledRejection", {
+    error: reason instanceof Error ? reason.message : String(reason)
+  });
+});
+
+process.on("uncaughtException", err => {
+  logEvent("error", "process.uncaughtException", {
+    error: err.message,
+    stack: err.stack
   });
 });
 
 server.listen(PORT, () => {
   console.log(`\n✓ Hire Intelligence running at http://localhost:${PORT}`);
+  console.log(`  Using model: ${GROK_MODEL}`);
   console.log(`  Press Ctrl+C to stop\n`);
 });
