@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hire Intelligence — BMW Digital Excellence Hub</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="nav-logo">HI</span>
+        <span class="nav-title">Hire Intelligence</span>
+      </div>
+      <div class="nav-steps">
+        <div class="step active" id="step-1">
+          <span class="step-num">1</span>
+          <span class="step-label">Setup</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step-2">
+          <span class="step-num">2</span>
+          <span class="step-label">Analysis</span>
+        </div>
+        <div class="step-divider"></div>
+        <div class="step" id="step-3">
+          <span class="step-num">3</span>
+          <span class="step-label">Decision</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SCREEN 1: SETUP -->
+  <main class="screen" id="screen-setup">
+    <div class="screen-header">
+      <h1>Configure Your Hiring Analysis</h1>
+      <p class="screen-subtitle">Provide the role, candidates, scenario, and urgency to begin the AI pipeline.</p>
+    </div>
+
+    <div class="setup-grid">
+
+      <!-- JD INPUT -->
+      <div class="card full-width">
+        <div class="card-header">
+          <div class="card-icon blue">JD</div>
+          <div>
+            <h2 class="card-title">Job Description</h2>
+            <p class="card-desc">Paste the full role description below</p>
+          </div>
+          <button class="btn-ghost" onclick="loadDefaultJD()">Load example JD</button>
+        </div>
+        <textarea id="jd-input" class="jd-textarea" placeholder="Paste your job description here..."></textarea>
+      </div>
+
+      <!-- CANDIDATES -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon green">CV</div>
+          <div>
+            <h2 class="card-title">Candidates</h2>
+            <p class="card-desc">Select or load candidate profiles</p>
+          </div>
+          <button class="btn-ghost" onclick="loadAllCandidates()">Load all 3</button>
+        </div>
+        <div class="candidate-list" id="candidate-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- SCENARIO -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon amber">SC</div>
+          <div>
+            <h2 class="card-title">Business Scenario</h2>
+            <p class="card-desc">The current business context</p>
+          </div>
+        </div>
+        <div class="scenario-grid" id="scenario-grid">
+          <!-- Populated by JS -->
+        </div>
+        <div class="custom-scenario" id="custom-scenario" style="display:none;">
+          <label class="field-label">Custom scenario description</label>
+          <textarea id="custom-scenario-text" class="scenario-textarea" placeholder="Describe the current business context..."></textarea>
+        </div>
+      </div>
+
+      <!-- URGENCY -->
+      <div class="card urgency-card">
+        <div class="card-header">
+          <div class="card-icon coral">UR</div>
+          <div>
+            <h2 class="card-title">Urgency</h2>
+            <p class="card-desc">Weeks until role must be filled</p>
+          </div>
+        </div>
+        <div class="urgency-display">
+          <span class="urgency-number" id="urgency-display">8</span>
+          <span class="urgency-unit">weeks</span>
+        </div>
+        <input type="range" id="urgency-slider" min="1" max="20" value="8"
+               oninput="updateUrgency(this.value)" class="urgency-slider" />
+        <div class="urgency-scale">
+          <span>1 week</span>
+          <span class="urgency-hint" id="urgency-hint">Moderate urgency</span>
+          <span>20 weeks</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RUN BUTTON -->
+    <div class="run-bar">
+      <div class="run-status" id="run-status">
+        <span id="status-text">Fill in all fields to continue</span>
+      </div>
+      <button class="btn-primary" id="run-btn" onclick="runPipeline()" disabled>
+        Run Analysis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- SCREEN 2: ANALYSIS -->
+  <main class="screen hidden" id="screen-analysis">
+    <div class="screen-header">
+      <h1>Pipeline Analysis</h1>
+      <p class="screen-subtitle">Four AI agents are evaluating your hiring decision in real time.</p>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="pipeline-progress" id="pipeline-progress">
+      <div class="pipeline-step" id="prog-1">
+        <div class="prog-icon">1</div>
+        <div class="prog-info">
+          <span class="prog-name">JD Adaptation</span>
+          <span class="prog-status" id="prog-status-1">Waiting...</span>
+        </div>
+        <div class="prog-dot"></div>
+      </div>
+      <div class="pipeline-step" id="prog-2">
+        <div class="prog-icon">2</div>
+        <div class="prog-info">
+          <span class="prog-name">Sourcing Strategy</span>
+          <span class="prog-status" id="prog-status-2">Waiting...</span>
+        </div>
+        <div class="prog-dot"></div>
+      </div>
+      <div class="pipeline-step" id="prog-3">
+        <div class="prog-icon">3</div>
+        <div class="prog-info">
+          <span class="prog-name">Candidate Scoring</span>
+          <span class="prog-status" id="prog-status-3">Waiting...</span>
+        </div>
+        <div class="prog-dot"></div>
+      </div>
+      <div class="pipeline-step" id="prog-4">
+        <div class="prog-icon">4</div>
+        <div class="prog-info">
+          <span class="prog-name">Decision Synthesis</span>
+          <span class="prog-status" id="prog-status-4">Waiting...</span>
+        </div>
+        <div class="prog-dot"></div>
+      </div>
+    </div>
+
+    <!-- PANEL A: ADAPTED JD -->
+    <div class="panel hidden" id="panel-a">
+      <div class="panel-header">
+        <span class="panel-badge blue">Agent 1 — UC02</span>
+        <h2>Adapted Job Description</h2>
+        <p class="panel-desc" id="panel-a-summary"></p>
+      </div>
+      <div class="criteria-table" id="criteria-table">
+        <!-- Populated by JS -->
+      </div>
+      <!-- OVERRIDE SECTION -->
+      <div class="override-section" id="override-section">
+        <button class="btn-ghost override-toggle" onclick="toggleOverride()">
+          Adjust weights manually
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <div class="override-body hidden" id="override-body">
+          <div class="override-sliders" id="override-sliders"></div>
+          <div class="override-total">
+            Total: <span id="override-total">100</span>% 
+            <span id="override-valid" class="override-ok">✓ Valid</span>
+          </div>
+          <button class="btn-secondary" onclick="rerunScoring()">Re-run scoring with adjusted weights</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL B: SOURCING -->
+    <div class="panel hidden" id="panel-b">
+      <div class="panel-header">
+        <span class="panel-badge amber">Agent 2 — UC05</span>
+        <h2>Sourcing Recommendation</h2>
+      </div>
+      <div class="sourcing-grid" id="sourcing-grid">
+        <!-- Populated by JS -->
+      </div>
+      <div class="sourcing-reasoning" id="sourcing-reasoning"></div>
+    </div>
+
+    <!-- PANEL C: RANKINGS -->
+    <div class="panel hidden" id="panel-c">
+      <div class="panel-header">
+        <span class="panel-badge green">Agent 3 — UC04</span>
+        <h2>Candidate Rankings</h2>
+        <p class="panel-desc">Click any candidate to expand per-dimension scores.</p>
+      </div>
+      <div class="rankings" id="rankings">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- CONTINUE TO DECISION -->
+    <div class="run-bar hidden" id="continue-bar">
+      <button class="btn-primary" onclick="goToDecision()">
+        View Final Decision
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- SCREEN 3: DECISION -->
+  <main class="screen hidden" id="screen-decision">
+    <div class="decision-hero" id="decision-hero">
+      <div class="decision-hero-inner">
+        <span class="decision-badge" id="decision-confidence"></span>
+        <h1 class="decision-headline" id="decision-headline"></h1>
+        <p class="decision-reasoning" id="decision-reasoning"></p>
+      </div>
+    </div>
+
+    <div class="decision-body">
+      <!-- KEY REASONS -->
+      <div class="card">
+        <h2 class="card-title">Key reasons</h2>
+        <ol class="reasons-list" id="reasons-list"></ol>
+      </div>
+
+      <!-- TRADEOFF -->
+      <div class="card">
+        <h2 class="card-title">Tradeoff analysis</h2>
+        <div class="tradeoff-grid">
+          <div class="tradeoff-cell recommended">
+            <span class="tradeoff-label">Recommended hire</span>
+            <p id="tradeoff-recommended"></p>
+          </div>
+          <div class="tradeoff-cell fastest">
+            <span class="tradeoff-label">Fastest available hire</span>
+            <p id="tradeoff-fastest"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RED FLAGS -->
+      <div class="card hidden" id="red-flags-card">
+        <h2 class="card-title">Red flags for the committee</h2>
+        <ul class="red-flags-list" id="red-flags-list"></ul>
+      </div>
+
+      <!-- APPROVE -->
+      <div class="card approve-card">
+        <h2 class="card-title">Record decision</h2>
+        <p class="card-desc">Log the hiring committee's final decision for audit trail.</p>
+        <textarea id="decision-note" class="decision-textarea" placeholder="Add committee notes (optional)..."></textarea>
+        <div class="approve-actions">
+          <button class="btn-approve" onclick="approveDecision()">Approve Recommendation</button>
+          <button class="btn-secondary" onclick="overrideDecision()">Override &amp; Note</button>
+          <button class="btn-ghost" onclick="window.print()">Print / Export</button>
+        </div>
+        <div class="approval-confirmation hidden" id="approval-confirmation"></div>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="back-bar">
+      <button class="btn-ghost" onclick="goBack()">← Back to Analysis</button>
+      <button class="btn-ghost" onclick="startOver()">Start new analysis</button>
+    </div>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="data/candidates.js"></script>
+  <script src="data/scenarios.js"></script>
+  <script src="data/jobDescription.js"></script>
+  <script src="js/pipeline.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

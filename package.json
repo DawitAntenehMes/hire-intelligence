@@ -1,0 +1,13 @@
+{
+  "name": "hire-intelligence",
+  "version": "1.0.0",
+  "description": "BMW Digital Excellence Hub — Hire Intelligence multi-agent hiring tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "openai": "^4.52.0"
+  }
+}
