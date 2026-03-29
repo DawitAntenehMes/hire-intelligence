@@ -10,7 +10,6 @@ POST /api/apply  (multipart/form-data)
     notice_period      — optional
     salary_expectation — optional
     references_available — optional bool (default false)
-    linked_in          — optional, only included if candidate provides it
 
 Response: the parsed CandidateProfile (JSON).
 """
@@ -37,7 +36,6 @@ async def apply(
     notice_period: str = Form(default=""),
     salary_expectation: str = Form(default=""),
     references_available: bool = Form(default=False),
-    linked_in: str = Form(default=""),
     is_internal: bool = Form(default=False),
     position_title: str = Form(default=""),
 ) -> CandidateProfile:
@@ -71,7 +69,6 @@ async def apply(
         notice_period_form=notice_period,
         salary_expectation_form=salary_expectation,
         references_available_form=references_available,
-        linked_in_form=linked_in,
         candidate_id=candidate_id,
         is_internal=is_internal,
         position_title=position_title.strip(),

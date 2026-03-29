@@ -1,0 +1,500 @@
+{
+  "candidates": [
+    {
+      "id": "cand_001",
+      "name": "Margaret A. Thornton",
+      "initials": "MA",
+      "applied_position": "Chief Supply Chain Officer (CSCO)",
+      "avatar_color": "#E8F1FB",
+      "avatar_text": "#1C69D4",
+      "type": "external",
+      "current_role": "Chief Supply Chain Officer, HorizonTech Industries",
+      "years_experience": 22,
+      "availability_weeks": 8,
+      "location": "San Francisco, CA",
+      "key_skills": [
+        "Supply Chain Strategy",
+        "Digital Transformation",
+        "Leadership",
+        "SAP S/4HANA",
+        "ML-based Demand Forecasting",
+        "Global Logistics",
+        "Procurement",
+        "Negotiation",
+        "Strategic Sourcing",
+        "P&L Ownership",
+        "Board Presentations",
+        "Organisational Design",
+        "M&A Supply Chain Integration",
+        "Risk Management",
+        "Change Management",
+        "Data Analysis",
+        "Executive Stakeholder Management"
+      ],
+      "notable_achievements": [
+        "My most significant achievement was the end-to-end digital transformation at HorizonTech Industries. I\r\ndesigned and executed a 36-month programme that migrated 14 legal entities to SAP S/4HANA, deployed an\r\nML demand forecasting engine (reducing MAPE from 28% to 11%), and consolidated our 3PL base from 18 to 9\r\npartners. Collectively, the programme delivered $120M in quantified savings, reduced OTIF gaps by 6.8\r\npercentage points, and freed $42M in working capital from safety stock reduction. The programme was\r\ncompleted on time, 6% under the approved $48M budget.",
+        "Delivered $120M+ in cumulative cost savings",
+        "Transformed complex, multi-region supply chains through data-driven strategy and digital platforms",
+        "Improved OTIF from 91% to 97.8%",
+        "Increased perfect order rate to 98.6% within 18 months",
+        "Deployed ML-based demand forecasting platform reducing forecast error (MAPE) from 28% to 11% and cutting safety stock by $42M",
+        "Redesigned global logistics network, consolidating 3PL base from 18 to 9 strategic partners and achieving $34M annual freight savings",
+        "End-to-end digital transformation at HorizonTech Industries, delivering $120M in quantified savings and reducing OTIF gaps by 6.8 percentage points"
+      ],
+      "leadership_style": "Clarity-driven, accountable, and invested in people, with a focus on measurable outcomes and constructive intervention",
+      "languages": [],
+      "weaknesses": [
+        "Potential over-reliance on technology for solutions",
+        "Need for more explicit conflict resolution strategies",
+        "Possible difficulty in delegating tasks and trusting team members to handle responsibilities"
+      ],
+      "education": [
+        {
+          "degree": "MBA",
+          "university": "University of Chicago - Booth School of Business",
+          "graduation_year": 2007
+        },
+        {
+          "degree": "BSc",
+          "university": "Georgia Institute of Technology",
+          "graduation_year": 2002
+        }
+      ],
+      "certifications": [
+        "APICS CSCP",
+        "Lean Six Sigma Black Belt",
+        "SAP SCM Certified Professional"
+      ],
+      "motivation": {
+        "why_best_suited": "My career has been built at the intersection of operational excellence and digital transformation \u2014 exactly what\r\nthis role demands. I have held C-suite supply chain responsibility for over six years, leading organisations of\r\ncomparable scale and complexity to VLG's. My experience delivering $120M+ in savings, executing an SAP\r\nS/4HANA migration across 14 entities, and transforming a 24-country supply chain through ML forecasting and\r\nIoT visibility positions me to accelerate VLG's stated transformation priorities from day one. I understand the\r\nboard-level visibility required of this role and have consistently earned the trust of CEOs and investors throughout my career.",
+        "biggest_achievement": "My most significant achievement was the end-to-end digital transformation at HorizonTech Industries. I\r\ndesigned and executed a 36-month programme that migrated 14 legal entities to SAP S/4HANA, deployed an\r\nML demand forecasting engine (reducing MAPE from 28% to 11%), and consolidated our 3PL base from 18 to 9\r\npartners. Collectively, the programme delivered $120M in quantified savings, reduced OTIF gaps by 6.8\r\npercentage points, and freed $42M in working capital from safety stock reduction. The programme was\r\ncompleted on time, 6% under the approved $48M budget.",
+        "leadership_approach": "I lead through clarity, accountability, and genuine investment in people. At the executive level, I establish\r\nunambiguous strategic intent and hold my leadership team to measurable outcomes \u2014 but I stay close enough\r\nto the work to intervene constructively when needed. I make decisions through structured frameworks and data,\r\nbut I never confuse analysis with action. On conflict: I surface it early, create psychological safety for dissent,\r\nand resolve it at the lowest possible level. My teams describe my style as demanding but fair, and several of my\r\ndirect reports have been promoted into VP and C-suite roles at peer organisations."
+      },
+      "salary_expectation": "$340,000 base + equity (open to discussion)",
+      "notice_period": "3 months",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_002",
+      "name": "David R. Kaplan",
+      "initials": "DR",
+      "applied_position": "Chief Supply Chain Officer (CSCO)",
+      "avatar_color": "#dcfce7",
+      "avatar_text": "#16a34a",
+      "type": "external",
+      "current_role": "SVP, Supply Chain & Operations at Luminary Commerce",
+      "years_experience": 19,
+      "availability_weeks": 8,
+      "location": "Palo Alto, CA",
+      "key_skills": [
+        "Supply Chain Transformation",
+        "Technology-enabled supply chain",
+        "Analytics-first supply chain organisations",
+        "Strategic vision",
+        "Talent building",
+        "Commercial acumen",
+        "Oracle SCM Cloud",
+        "SAP (ECC / S/4HANA)",
+        "Kinaxis RapidResponse",
+        "Tableau",
+        "Power BI",
+        "Python",
+        "Coupa",
+        "Salesforce (CRM integration)",
+        "o9 Solutions",
+        "Growth-stage scaling",
+        "Investor relations",
+        "Risk management",
+        "Cross-functional leadership",
+        "Executive communications"
+      ],
+      "notable_achievements": [
+        "The build-out of Luminary Commerce's supply chain is my defining professional achievement. I inherited a\r\nfragmented 12-person operation with no ERP integration and built it into a 95-person global function capable of\r\nprocessing 80,000 daily orders at 99.5% accuracy. Key outcomes included $11.2M annual obsolescence\r\nreduction, $9.4M freight savings, and 38% stockout improvement \u2014 all while scaling 5x in revenue. The\r\nprogramme was completed in under 36 months, without disruption to customer experience.",
+        "Built supply chain function from 12-person team to 95-person global organisation at Luminary Commerce",
+        "Designed and deployed ML-driven inventory optimisation platform, reducing SKU-level stockouts by 38% and obsolescence write-offs by $11.2M annually",
+        "Established supplier ecosystem across APAC, negotiating average 14% unit cost reduction through volume commitments and localisation",
+        "Delivered $9.4M annual freight savings and 2.1-day improvement in average delivery time through 3PL RFP and transition to dual-partner model",
+        "Build-out of Luminary Commerce's supply chain, achieving $11.2M annual obsolescence reduction, $9.4M freight savings, and 38% stockout improvement while scaling 5x in revenue"
+      ],
+      "leadership_style": "Analytically driven with empathy, data-grounded decision-making, and investing in people development",
+      "languages": [],
+      "weaknesses": [
+        "Potential difficulty in adapting to a more established corporate setting",
+        "May face challenges in scaling beyond high-growth e-commerce and SaaS-adjacent businesses"
+      ],
+      "education": [
+        {
+          "degree": "MBA",
+          "university": "Harvard Business School",
+          "graduation_year": 2008
+        },
+        {
+          "degree": "BA",
+          "university": "University of California, Berkeley",
+          "graduation_year": 2004
+        }
+      ],
+      "certifications": [
+        "APICS CSCP",
+        "AWS Cloud Practitioner",
+        "Certified Procurement Professional (CPP)"
+      ],
+      "motivation": {
+        "why_best_suited": "I have spent the last five years scaling a supply chain from early-stage to nearly $1B GMV \u2014 a journey that\r\ndemanded every skill this role requires: strategic vision, technology enablement, talent building, and commercial\r\nacumen. My experience building analytics-first supply chain organisations positions me to accelerate VLG's\r\ndigital roadmap. I have presented to boards, institutional investors, and audit committees, so I understand the\r\ngovernance expectations of a CSCO at a company of VLG's scale. Unlike candidates from large corporates, I\r\nbring an entrepreneurial velocity that is difficult to develop in a more established setting.",
+        "biggest_achievement": "The build-out of Luminary Commerce's supply chain is my defining professional achievement. I inherited a\r\nfragmented 12-person operation with no ERP integration and built it into a 95-person global function capable of\r\nprocessing 80,000 daily orders at 99.5% accuracy. Key outcomes included $11.2M annual obsolescence\r\nreduction, $9.4M freight savings, and 38% stockout improvement \u2014 all while scaling 5x in revenue. The\r\nprogramme was completed in under 36 months, without disruption to customer experience.",
+        "leadership_approach": "I lead analytically but with empathy. I believe every major decision should be data-grounded, but I also know\r\nthat execution is a human endeavour. I invest heavily in people development and have a strong track record of\r\nretaining high performers in competitive talent markets. When conflict arises, I prefer to address it directly,\r\nprivately first, then collectively if needed \u2014 always anchoring the resolution to shared goals rather than\r\nindividual positions. My team would say I set an ambitious bar, explain the 'why' clearly, and give them the\r\nautonomy to find the 'how'."
+      },
+      "salary_expectation": "$320,000 $360,000 base + meaningful equity",
+      "notice_period": "2 months",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_003",
+      "name": "Priya Sundaram",
+      "initials": "PS",
+      "applied_position": "Chief Supply Chain Officer (CSCO)",
+      "avatar_color": "#fef3c7",
+      "avatar_text": "#d97706",
+      "type": "external",
+      "current_role": "VP, Global Supply Chain Strategy at Fortis Industrial Solutions",
+      "years_experience": 17,
+      "availability_weeks": 8,
+      "location": "Chicago, IL",
+      "key_skills": [
+        "procurement strategy",
+        "ERP transformation",
+        "resilience-by-design supply chain programmes",
+        "category management",
+        "SAP S/4HANA",
+        "Ariba",
+        "Kinaxis",
+        "Blue Yonder",
+        "Power BI",
+        "Oracle Fusion",
+        "Coupa",
+        "Python",
+        "leadership",
+        "organisational design",
+        "executive communications",
+        "cross-cultural leadership",
+        "M&A integration",
+        "change management",
+        "board reporting"
+      ],
+      "notable_achievements": [
+        "My proudest achievement is the procurement transformation at Fortis Industrial Solutions. Starting from a\r\nfragmented, relationship-managed supplier base of 240 vendors, I built a category management capability,\r\ndeployed should-cost modelling, and rationalised to 110 strategic suppliers over 36 months \u2014 delivering $78M\r\nin cumulative savings. Crucially, this was structural rather than transactional: savings recurred and grew\r\nyear-on-year. In parallel, I expanded dual-source coverage from 40% to 74% of critical spend, materially\r\nreducing supply disruption risk.",
+        "Delivered $78M cumulative savings through procurement transformation at Fortis Industrial Solutions",
+        "Improved inventory turns from 6.1x to 8.9x over 3 years, releasing $31M working capital",
+        "Expanded dual-source coverage from 40% to 74% of critical spend, reducing supply disruption risk",
+        "Developed and implemented supply chain risk programme post-pandemic, reducing single-source risk events by 58%"
+      ],
+      "leadership_style": "Data-driven, structural solution-focused leader with high standards and deep respect for people",
+      "languages": [],
+      "weaknesses": [
+        "Potential over-reliance on data-driven decision making",
+        "May struggle with short-term, transactional solutions",
+        "Possibly limited experience with smaller, more agile organisations"
+      ],
+      "education": [
+        {
+          "degree": "MBA, Supply Chain & Operations",
+          "university": "Kellogg School of Management, Northwestern University",
+          "graduation_year": 2010
+        },
+        {
+          "degree": "BTech, Mechanical Engineering",
+          "university": "Indian Institute of Technology, Bombay",
+          "graduation_year": 2005
+        }
+      ],
+      "certifications": [
+        "APICS CSCP",
+        "APICS CSCM",
+        "Lean Six Sigma Black Belt",
+        "SAP SCM Certified"
+      ],
+      "motivation": {
+        "why_best_suited": "My 17 years span Fortune 100 industrials and global consumer goods \u2014 precisely the complex, multinational\r\nenvironments VLG operates in. I have owned global supply chain strategy with full P&L; visibility, led teams of\r\n85+, and delivered both hard-dollar savings ($78M+ cumulatively) and structural improvements in resilience and\r\nservice quality. My dual APICS certification and SAP S/4HANA leadership experience are directly applicable to\r\nVLG's stated ERP modernisation agenda. I bring a balance of strategic depth and execution discipline that I\r\nbelieve is rare and well-suited to this role.",
+        "biggest_achievement": "My proudest achievement is the procurement transformation at Fortis Industrial Solutions. Starting from a\r\nfragmented, relationship-managed supplier base of 240 vendors, I built a category management capability,\r\ndeployed should-cost modelling, and rationalised to 110 strategic suppliers over 36 months \u2014 delivering $78M\r\nin cumulative savings. Crucially, this was structural rather than transactional: savings recurred and grew\r\nyear-on-year. In parallel, I expanded dual-source coverage from 40% to 74% of critical spend, materially\r\nreducing supply disruption risk.",
+        "leadership_approach": "I lead with high standards, deep respect for people, and a relentless focus on structural solutions. I don't tolerate\r\nshort-termism \u2014 I push my teams to fix root causes, not symptoms. My decision-making is disciplined: I use\r\ndata to frame the problem, scenarios to evaluate options, and clear criteria to choose. On conflict, I lean in\r\nrather than deflect \u2014 I find that named conflict resolved early prevents larger misalignments later. I am\r\nparticularly proud of my track record developing talent: four of my direct reports have progressed to VP and\r\nC-suite roles."
+      },
+      "salary_expectation": "$330,000 base + equity",
+      "notice_period": "4 months",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_004",
+      "name": "James T. Holloway",
+      "initials": "JT",
+      "applied_position": "Supply Chain Operations Manager",
+      "avatar_color": "#f3e8ff",
+      "avatar_text": "#7c3aed",
+      "type": "external",
+      "current_role": "Senior Fulfilment Centre Manager at Quartz Commerce",
+      "years_experience": 13,
+      "availability_weeks": 8,
+      "location": "Chicago, IL",
+      "key_skills": [
+        "WMS implementation",
+        "carrier optimisation",
+        "warehouse team management",
+        "continuous improvement",
+        "Lean Six Sigma",
+        "APICS",
+        "Manhattan Active WMS",
+        "Labor planning",
+        "Blue Yonder",
+        "Oracle SCM",
+        "Tableau",
+        "Excel",
+        "SAP EWM",
+        "Power BI",
+        "UPS/FedEx/Carrier APIs"
+      ],
+      "notable_achievements": [
+        "My highest-impact achievement is the Manhattan Active WMS deployment across two Quartz Commerce\r\nfulfilment centres. I owned the project end-to-end: requirements definition, vendor management, site training,\r\nand go-live. The results were measurable: mis-pick rate fell from 1.8% to 0.28%, throughput improved 31%, and\r\ndock-to-stock time halved. Critically, I did this while maintaining daily operations \u2014 we had zero SLA breaches\r\nduring the 9-month transition. The system has since become the group-wide standard, adopted by two\r\nadditional sites.",
+        "Exceeding SLAs while reducing cost-per-unit metrics",
+        "Reducing mis-pick rate from 1.8% to 0.28% and increasing throughput by 31% through Manhattan Active WMS deployment",
+        "Achieving zero OSHA recordable incidents for 24 consecutive months",
+        "Reducing labour cost per order from $2.84 to $2.11",
+        "Improving OTD from 93.1% to 97.6% without rate increase"
+      ],
+      "leadership_style": "Structured and presence-based with clarity of standards and investment in people's development",
+      "languages": [],
+      "weaknesses": [
+        "Potential overreliance on data-driven decision making",
+        "Limited experience with extremely large or complex logistics operations",
+        "Possible difficulty in adapting to radically different company cultures"
+      ],
+      "education": [
+        {
+          "degree": "BSc, Supply Chain Management",
+          "university": "Illinois State University",
+          "graduation_year": 2010
+        }
+      ],
+      "certifications": [
+        "APICS CSCP",
+        "Lean Six Sigma Green Belt (ASQ)",
+        "Manhattan Associates WMS Certified"
+      ],
+      "motivation": {
+        "why_best_suited": "I have spent 13 years in high-volume fulfilment environments that closely match VLG's Midwest network. I have\r\ndirectly managed two fulfilment centres processing up to 28,000 orders daily, led WMS deployments, and\r\ndelivered measurable improvements in OTD, accuracy, cost, and safety. My Lean Six Sigma and APICS\r\ncredentials are active and applied \u2014 not academic. I understand the pressure of peak seasons, carrier SLA\r\ndisputes, and team development in a high-turnover environment. I am confident I can contribute materially from\r\nweek one.",
+        "biggest_achievement": "My highest-impact achievement is the Manhattan Active WMS deployment across two Quartz Commerce\r\nfulfilment centres. I owned the project end-to-end: requirements definition, vendor management, site training,\r\nand go-live. The results were measurable: mis-pick rate fell from 1.8% to 0.28%, throughput improved 31%, and\r\ndock-to-stock time halved. Critically, I did this while maintaining daily operations \u2014 we had zero SLA breaches\r\nduring the 9-month transition. The system has since become the group-wide standard, adopted by two\r\nadditional sites.",
+        "leadership_approach": "My leadership style is structured and presence-based. I believe great operations require clarity of standards,\r\nvisible accountability, and genuine investment in people's development. I do daily floor walks, hold weekly 1:1s\r\nwith supervisors, and maintain open-door access for associates. When performance falls short, I address it\r\nquickly and specifically \u2014 never publicly, always with a path forward. Conflict between teams is resolved\r\nthrough data and shared KPIs: it's hard to argue with numbers. I have had zero involuntary supervisor turnover\r\nin the last three years, which I consider my most underrated metric."
+      },
+      "salary_expectation": "$105,000 base + bonus",
+      "notice_period": "4 weeks",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_005",
+      "name": "Rachel M. Torres",
+      "initials": "RM",
+      "applied_position": "Supply Chain Operations Manager",
+      "avatar_color": "#fee2e2",
+      "avatar_text": "#dc2626",
+      "type": "external",
+      "current_role": "Operations Manager \u2014 Midwest Region at AxisFulfilment Inc.",
+      "years_experience": 13,
+      "availability_weeks": 8,
+      "location": "Evanston, IL",
+      "key_skills": [
+        "S&OP",
+        "Data-driven KPI management",
+        "WMS administration",
+        "Power BI",
+        "Leadership",
+        "Team development",
+        "Continuous improvement",
+        "Carrier management",
+        "Cross-functional collaboration",
+        "Stakeholder communication",
+        "Advanced Excel",
+        "SQL"
+      ],
+      "notable_achievements": [
+        "Rebuilding the KPI reporting infrastructure at AxisFulfilment was my most impactful project. When I joined, KPI\r\ndata was produced manually from four separate systems, taking 6 hours per week and containing frequent\r\nerrors. I designed an integrated Power BI suite pulling live data from the WMS, TMS, and ERP, reducing\r\nreporting time to 45 minutes and eliminating data discrepancies. The dashboards are now used daily by\r\noperations supervisors and weekly by regional leadership. As a direct result, average OTD recovery time fell\r\nfrom 3 days to same-day.",
+        "Reduced pick errors by 41% and improved slot utilisation by 19% through WMS upgrade project",
+        "Improved forecast adherence from 74% to 88% within 8 months",
+        "Developed supervisor training programme, reducing first-year supervisor attrition from 42% to 14%",
+        "Rebuilt KPI reporting infrastructure, reducing reporting time from 6 hours to 45 minutes and eliminating data discrepancies",
+        "Achieved order accuracy of 99.8% over 24 consecutive months"
+      ],
+      "leadership_style": "Data-driven, transparent, and empowering",
+      "languages": [],
+      "weaknesses": [
+        "Limited international experience",
+        "Possibly over-reliance on data-driven decision making"
+      ],
+      "education": [
+        {
+          "degree": "BSc",
+          "university": "DePaul University",
+          "graduation_year": 2010
+        },
+        {
+          "degree": "Post-Graduate Diploma",
+          "university": "Northwestern University",
+          "graduation_year": 2021
+        }
+      ],
+      "certifications": [
+        "APICS CSCP",
+        "Lean Six Sigma Green Belt",
+        "Blue Yonder WMS Certified"
+      ],
+      "motivation": {
+        "why_best_suited": "I offer a distinctive combination of operational depth and analytical capability that is uncommon at this level. I\r\nhave managed up to 35,000 daily orders across three sites, led WMS administration and improvement projects,\r\nand built Power BI reporting infrastructure that my leadership team now depends on. My S&OP; experience \u2014\r\nimproving forecast adherence from 74% to 88% \u2014 is directly relevant to VLG's cross-functional alignment goals.\r\nI am rigorous with data but grounded in operational reality.",
+        "biggest_achievement": "Rebuilding the KPI reporting infrastructure at AxisFulfilment was my most impactful project. When I joined, KPI\r\ndata was produced manually from four separate systems, taking 6 hours per week and containing frequent\r\nerrors. I designed an integrated Power BI suite pulling live data from the WMS, TMS, and ERP, reducing\r\nreporting time to 45 minutes and eliminating data discrepancies. The dashboards are now used daily by\r\noperations supervisors and weekly by regional leadership. As a direct result, average OTD recovery time fell\r\nfrom 3 days to same-day.",
+        "leadership_approach": "I lead by equipping people with information and trust. I believe in transparent performance data \u2014 everyone on\r\nmy team sees the same KPIs I do, and we review them together. Conflict is addressed through data first,\r\nemotion second: most operational disputes dissolve when both sides see the same numbers. I invest in\r\nsupervisor development deliberately, which is why my attrition rate dropped from 42% to 14%. I make decisions\r\nquickly when the data is clear, and consult broadly when it isn't."
+      },
+      "salary_expectation": "$98,000\u2013$ 110,000 + bonus",
+      "notice_period": "6 weeks",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_006",
+      "name": "Kevin A. Osei",
+      "initials": "KA",
+      "applied_position": "Supply Chain Operations Manager",
+      "avatar_color": "#e0f2fe",
+      "avatar_text": "#0369a1",
+      "type": "external",
+      "current_role": "Regional Operations Manager at ProChain Distribution Group",
+      "years_experience": 10,
+      "availability_weeks": 8,
+      "location": "Naperville, IL",
+      "key_skills": [
+        "Six Sigma",
+        "SAP EWM",
+        "Safety culture",
+        "3PL & carrier management",
+        "Leadership",
+        "Budget management",
+        "Labour optimisation",
+        "Advanced Excel",
+        "Power BI",
+        "Supply Chain Operations"
+      ],
+      "notable_achievements": [
+        "The Six Sigma DMAIC project targeting inbound receiving variance at ProChain is my standout achievement.\r\nReceiving discrepancies were creating $620K in annual inventory writeoffs and causing downstream picking\r\nerrors. I led the full DMAIC cycle: mapped the process, identified root causes (primarily supplier labelling\r\ninconsistency and manual receipt entry), designed control measures, and implemented automated ASN\r\nmatching in SAP EWM. The result was elimination of the writeoff, stock accuracy improvement from 96.1% to\r\n99.4%, and a process Cpk of 1.42. Total annual benefit: approximately $890K including downstream picking\r\ngains.",
+        "Eliminated $620K annual writeoffs and achieved process Cpk of 1.42 through Six Sigma DMAIC initiative",
+        "Improved stock accuracy from 96.1% to 99.4%",
+        "Achieved $1.1M annual freight savings through 3PL contract restructuring",
+        "Improved on-time delivery to 96.8%",
+        "Reduced damage claims by 44% through enhanced packing standards",
+        "Increased team productivity by 19% through visual management boards and daily stand-ups"
+      ],
+      "leadership_style": "Leading by standards, structure, and presence with a focus on process definition and training",
+      "languages": [],
+      "weaknesses": [
+        "Limited international experience",
+        "Potential over-reliance on technical tools and certifications"
+      ],
+      "education": [
+        {
+          "degree": "BSc, Operations Management",
+          "university": "University of Illinois at Chicago",
+          "graduation_year": 2012
+        },
+        {
+          "degree": "Executive Programme, Supply Chain Leadership",
+          "university": "Michigan State University",
+          "graduation_year": 2019
+        }
+      ],
+      "certifications": [
+        "Lean Six Sigma Black Belt (ASQ)",
+        "SAP EWM Certified",
+        "APICS CPIM"
+      ],
+      "motivation": {
+        "why_best_suited": "My background in high-volume industrial distribution \u2014 managing safety-critical, multi-site operations under\r\nstrict SLAs \u2014 directly maps to VLG's Midwest fulfilment remit. I am a credentialled Six Sigma Black Belt with\r\nreal-world project ROI, an SAP EWM certified administrator, and a manager who has delivered measurable cost\r\nand quality improvements across every role. I bring a structured problem-solving mindset combined with strong\r\nfloor leadership.",
+        "biggest_achievement": "The Six Sigma DMAIC project targeting inbound receiving variance at ProChain is my standout achievement.\r\nReceiving discrepancies were creating $620K in annual inventory writeoffs and causing downstream picking\r\nerrors. I led the full DMAIC cycle: mapped the process, identified root causes (primarily supplier labelling\r\ninconsistency and manual receipt entry), designed control measures, and implemented automated ASN\r\nmatching in SAP EWM. The result was elimination of the writeoff, stock accuracy improvement from 96.1% to\r\n99.4%, and a process Cpk of 1.42. Total annual benefit: approximately $890K including downstream picking\r\ngains.",
+        "leadership_approach": "I lead by standards, structure, and presence. I believe that most operational failures are process failures, not\r\npeople failures \u2014 so I invest heavily in defining and training the right process before holding people\r\naccountable. My team knows exactly what 'good' looks like, sees their own KPIs daily, and has the tools to\r\nself-correct. When performance falls short, I diagnose before I react. On conflict: I bring it into the open with\r\ndata, keep emotions out of it, and close with a clear agreed action."
+      },
+      "salary_expectation": "$100,000 $112,000 + bonus",
+      "notice_period": "6 weeks",
+      "references_available": true,
+      "linked_in": null
+    },
+    {
+      "id": "cand_007",
+      "name": "Kevin A. Osei",
+      "initials": "KA",
+      "applied_position": "Supply Chain Operations Manager",
+      "avatar_color": "#E8F1FB",
+      "avatar_text": "#1C69D4",
+      "type": "external",
+      "current_role": "Regional Operations Manager at ProChain Distribution Group",
+      "years_experience": 10,
+      "availability_weeks": 8,
+      "location": "Naperville, IL",
+      "key_skills": [
+        "Supply Chain Operations",
+        "Industrial Distribution",
+        "B2B Logistics",
+        "Six Sigma",
+        "SAP EWM",
+        "SAP TM",
+        "3PL & Carrier Management",
+        "Leadership",
+        "Safety Culture",
+        "Cross-training",
+        "Budget Management",
+        "Labour Optimisation",
+        "Visual Management",
+        "Advanced Excel",
+        "Power BI"
+      ],
+      "notable_achievements": [
+        "The Six Sigma DMAIC project targeting inbound receiving variance at ProChain is my standout achievement.\r\nReceiving discrepancies were creating $620K in annual inventory writeoffs and causing downstream picking\r\nerrors. I led the full DMAIC cycle: mapped the process, identified root causes (primarily supplier labelling\r\ninconsistency and manual receipt entry), designed control measures, and implemented automated ASN\r\nmatching in SAP EWM. The result was elimination of the writeoff, stock accuracy improvement from 96.1% to\r\n99.4%, and a process Cpk of 1.42. Total annual benefit: approximately $890K including downstream picking\r\ngains.",
+        "Eliminated $620K annual writeoffs and achieved process Cpk of 1.42 through Six Sigma DMAIC initiative",
+        "Improved stock accuracy from 96.1% to 99.4%",
+        "Achieved $1.1M annual freight savings through 3PL contract restructuring",
+        "Improved on-time delivery to 96.8%",
+        "Reduced peak overtime by 28% and improved OSHA recordable rate by 67%",
+        "Increased team productivity by 19% through introduction of visual management boards and daily stand-ups"
+      ],
+      "leadership_style": "Leading by standards, structure, and presence with a focus on process failures over people failures",
+      "languages": [],
+      "weaknesses": [
+        "Limited experience with certain technical tools such as Blue Yonder and Manhattan",
+        "Potential over-reliance on structured problem-solving approach",
+        "Possible struggle with adapting to new or unconventional processes"
+      ],
+      "education": [
+        {
+          "degree": "BSc, Operations Management",
+          "university": "University of Illinois at Chicago",
+          "graduation_year": 2012
+        },
+        {
+          "degree": "Executive Programme, Supply Chain Leadership",
+          "university": "Michigan State University",
+          "graduation_year": 2019
+        }
+      ],
+      "certifications": [
+        "Lean Six Sigma Black Belt (ASQ)",
+        "SAP EWM Certified",
+        "APICS CPIM"
+      ],
+      "motivation": {
+        "why_best_suited": "My background in high-volume industrial distribution \u2014 managing safety-critical, multi-site operations under\r\nstrict SLAs \u2014 directly maps to VLG's Midwest fulfilment remit. I am a credentialled Six Sigma Black Belt with\r\nreal-world project ROI, an SAP EWM certified administrator, and a manager who has delivered measurable cost\r\nand quality improvements across every role. I bring a structured problem-solving mindset combined with strong\r\nfloor leadership.",
+        "biggest_achievement": "The Six Sigma DMAIC project targeting inbound receiving variance at ProChain is my standout achievement.\r\nReceiving discrepancies were creating $620K in annual inventory writeoffs and causing downstream picking\r\nerrors. I led the full DMAIC cycle: mapped the process, identified root causes (primarily supplier labelling\r\ninconsistency and manual receipt entry), designed control measures, and implemented automated ASN\r\nmatching in SAP EWM. The result was elimination of the writeoff, stock accuracy improvement from 96.1% to\r\n99.4%, and a process Cpk of 1.42. Total annual benefit: approximately $890K including downstream picking\r\ngains.",
+        "leadership_approach": "I lead by standards, structure, and presence. I believe that most operational failures are process failures, not\r\npeople failures \u2014 so I invest heavily in defining and training the right process before holding people\r\naccountable. My team knows exactly what 'good' looks like, sees their own KPIs daily, and has the tools to\r\nself-correct. When performance falls short, I diagnose before I react. On conflict: I bring it into the open with\r\ndata, keep emotions out of it, and close with a clear agreed action."
+      },
+      "salary_expectation": "$100,000 $112,000 + bonus",
+      "notice_period": "6 weeks",
+      "references_available": true,
+      "linked_in": null
+    }
+  ]
+}

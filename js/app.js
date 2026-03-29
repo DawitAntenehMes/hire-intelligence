@@ -179,7 +179,6 @@ function _normCandidate(c) {
     salaryExpectation: c.salary_expectation ?? c.salaryExpectation ?? null,
     noticePeriod: c.notice_period ?? c.noticePeriod ?? null,
     referencesAvailable: c.references_available ?? c.referencesAvailable ?? false,
-    linkedIn: c.linked_in ?? c.linkedIn ?? null,
     appliedPosition: c.applied_position ?? c.appliedPosition ?? "",
     motivation: c.motivation ? {
       whyBestSuited: c.motivation.whyBestSuited ?? c.motivation.why_best_suited ?? "",
@@ -704,7 +703,6 @@ function openProfileModal(id) {
         ${_pmField("Notice Period", c.noticePeriod)}
         ${_pmField("Salary Expectation", c.salaryExpectation)}
         ${_pmField("References", c.referencesAvailable ? "Available" : "Not specified")}
-        ${c.linkedIn ? _pmField("LinkedIn", c.linkedIn) : ""}
       </div>
     </div>
 

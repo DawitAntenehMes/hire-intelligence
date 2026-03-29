@@ -38,7 +38,6 @@ def _to_snake(c: dict) -> dict:
         "salary_expectation": c.get("salaryExpectation") or c.get("salary_expectation"),
         "notice_period": c.get("noticePeriod") or c.get("notice_period"),
         "references_available": c.get("referencesAvailable") or c.get("references_available", False),
-        "linked_in": c.get("linkedIn") or c.get("linked_in"),
         "motivation": c.get("motivation"),
     }
 

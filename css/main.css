@@ -67,18 +67,12 @@ body {
   gap: 10px;
 }
 
-.nav-logo {
+.nav-logo-img {
   width: 34px;
   height: 34px;
-  background: var(--blue);
-  color: var(--white);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 .nav-title {

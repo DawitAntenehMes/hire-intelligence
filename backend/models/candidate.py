@@ -48,7 +48,6 @@ class CandidateProfile(BaseModel):
     salary_expectation: Optional[str] = None
     notice_period: Optional[str] = None
     references_available: bool = False
-    linked_in: Optional[str] = None  # Optional — privacy respected
 
     def to_pipeline_dict(self) -> dict:
         """
@@ -84,7 +83,6 @@ class CandidateProfile(BaseModel):
             "salaryExpectation": self.salary_expectation,
             "noticePeriod": self.notice_period,
             "referencesAvailable": self.references_available,
-            "linkedIn": self.linked_in,
             "motivation": {
                 "whyBestSuited": self.motivation.why_best_suited,
                 "biggestAchievement": self.motivation.biggest_achievement,

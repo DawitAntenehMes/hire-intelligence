@@ -223,7 +223,6 @@
                 salaryExpectation: profile.salary_expectation ?? null,
                 noticePeriod: profile.notice_period ?? null,
                 referencesAvailable: profile.references_available ?? false,
-                linkedIn: profile.linked_in ?? null,
                 appliedPosition: profile.applied_position ?? "",
                 motivation: profile.motivation ? {
                     whyBestSuited: profile.motivation.why_best_suited ?? "",

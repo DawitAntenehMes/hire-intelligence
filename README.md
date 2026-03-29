@@ -5,46 +5,51 @@ Multi-agent AI pipeline for senior hiring decisions. Combines UC02 (Dynamic JD A
 
 ---
 
-## QUICK START (4 steps)
+## QUICK START
 
-### 1. Get a Grok API key
-- Go to https://console.x.ai
+### 1. Get an OpenRouter API key
+- Go to https://openrouter.ai
 - Sign up or log in
 - Create a new API key
-- Copy your key (starts with `sk-`)
 
 ### 2. Install dependencies
 ```bash
-npm install
+cd backend
+pip install -r requirements.txt
 ```
 
 ### 3. Add your API key
-Create a `.env` file in the project root:
-```bash
-GROK_API_KEY=sk-your-grok-api-key-here
+Create a `.env.local` file in the project root:
+```
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
 
 ### 4. Start the server
 ```bash
-npm start
+cd backend
+python main.py
 ```
 
-Open **http://localhost:3000** in your browser.
+Open **http://localhost:3001** in your browser.
 
 ---
 
 ## HOW IT WORKS
 
-**No framework. No build step. No React. No TypeScript.**
+### Workflow
 
-Just:
-- `index.html` — the entire 3-screen UI
-- `css/main.css` — all styles
-- `js/app.js` — navigation, state, event handling
-- `js/ui.js` — DOM rendering functions
-- `js/pipeline.js` — API call functions
-- `data/*.js` — candidate, scenario, and JD data
-- `server.js` — Node.js server (no Express) that serves HTML + runs 4 AI agents via Grok
+1. **HR creates positions** — On the main dashboard, click "+ Add Position" to add job descriptions (title + full JD text). Multiple positions can be managed simultaneously for different roles in the same company.
+2. **Candidates apply** — On the `/apply.html` page, applicants select a position from a dropdown, upload their CV, and answer screening questions. Each application is tied to a specific position.
+3. **HR reviews candidates** — Back on the dashboard, candidates are displayed with the position they applied to. Use the position filter to view candidates per role.
+4. **HR selects a position for the pipeline** — Click a position card to select it. The JD auto-populates and candidates are filtered to that role.
+5. **HR picks candidates & runs the AI pipeline** — Select up to 3 candidates, choose a business scenario, set urgency, and run the 4-agent analysis.
+
+### Architecture
+
+- **Frontend**: Vanilla HTML/CSS/JS — no frameworks, no build step
+- **Backend**: Python FastAPI + Uvicorn
+- **AI**: 4 specialized LLM agents via OpenRouter API
+- **Storage**: Candidates persisted to `backend/data/candidates.json`; JD positions stored in browser localStorage
 
 ---
 
@@ -52,48 +57,63 @@ Just:
 
 ```
 hire-intelligence/
-├── index.html          ← All 3 screens in one file
-├── server.js           ← Node.js backend + all 4 agents
-├── package.json
-└── .env                ← Your GROK_API_KEY (never commit this)
+├── index.html              ← HR dashboard (3-screen pipeline UI)
+├── apply.html              ← Candidate application page
 ├── css/
-│   └── main.css        ← All styles
+│   └── main.css            ← All styles
 ├── js/
-│   ├── app.js          ← App logic and navigation
-│   ├── ui.js           ← DOM rendering
-│   └── pipeline.js     ← API calls + demo fallback data
-└── data/
-    ├── candidates.js   ← 3 synthetic candidate profiles
-    ├── scenarios.js    ← 4 business scenarios
-    └── jobDescription.js ← Default JD text
+│   ├── app.js              ← App state, JD management, position filtering, navigation
+│   ├── ui.js               ← DOM rendering (candidates, JD list, pipeline panels)
+│   ├── apply.js            ← Application form logic
+│   └── pipeline.js         ← API client for agent pipeline
+├── data/
+│   ├── scenarios.js        ← 5 business scenarios
+│   └── jobDescription.js   ← Example JD text
+├── backend/
+│   ├── main.py             ← FastAPI app, static file serving, CORS
+│   ├── requirements.txt
+│   ├── api/
+│   │   ├── apply.py        ← POST /api/apply (candidate intake)
+│   │   ├── candidates.py   ← GET /api/candidates
+│   │   ├── pipeline.py     ← POST /api/pipeline, POST /api/pipeline/rerun
+│   │   └── health.py       ← GET /api/health
+│   ├── core/
+│   │   ├── agents.py       ← All 5 AI agents (Agent 0–4)
+│   │   ├── cv_parser.py    ← PDF/DOCX text extraction
+│   │   └── store.py        ← Thread-safe JSON file store
+│   └── models/
+│       ├── candidate.py    ← CandidateProfile (Pydantic model)
+│       └── pipeline.py     ← Pipeline request/response models
+└── .env.local              ← Your OPENROUTER_API_KEY (never commit)
 ```
 
 ---
 
-## DEMO MODE
+## KEY FEATURES
 
-If the backend isn't running or the API key is missing, the app automatically falls back to pre-built demo data so you can still show the full UI flow. Check the browser console — it will say "API unavailable, using demo data".
+### Multi-Position JD Management
+- Add, edit, and delete positions from the dashboard
+- Each position has a title and full JD text
+- Click a position card to select it for the pipeline
+- Positions are stored in localStorage (48-hour TTL)
+
+### Position-Aware Applications
+- Applicants select a position from a dropdown when applying
+- Position is stored server-side on the candidate profile (`applied_position`)
+- Candidates display their applied position as a badge in the HR view
+
+### Candidate Filtering
+- Filter the candidate pool by position
+- "All Positions" view shows everyone
+- Selecting a position for the pipeline auto-filters candidates
 
 ---
 
-## DEPLOYMENT (Vercel / Railway / Render)
-
-For Vercel — add a `vercel.json`:
-```json
-{
-  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "server.js" }]
-}
-```
-
-Set `GROK_API_KEY` as an environment variable in your deployment dashboard.
-
----
-
-## THE 4 AGENTS
+## THE 5 AGENTS
 
 | Agent | Use Case | What it does |
 |-------|----------|--------------|
+| Agent 0 | CV Parsing | Extracts structured profile from CV + screening answers |
 | Agent 1 | UC02 | Reweights JD criteria for the current business scenario |
 | Agent 2 | UC05 | Evaluates internal vs external sourcing across speed/cost/risk |
 | Agent 3 | UC04 | Scores every candidate per criterion (not a single number) |

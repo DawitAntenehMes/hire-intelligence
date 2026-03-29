@@ -145,8 +145,7 @@ Return ONLY valid JSON — no preamble, no markdown fences, no explanation:
   "certifications": ["PMP", "APICS CSCP"],
   "salary_expectation": "€120k–€140k",
   "notice_period": "3 months",
-  "references_available": true,
-  "linked_in": null
+  "references_available": true
 }
 
 Rules:
@@ -159,7 +158,6 @@ Rules:
 - weaknesses: infer 1–3 genuine gaps not explicitly stated if the CV does not list them
 - key_skills: extract from the full CV AND the why_best_suited answer — include all substantive skills mentioned
 - salary_expectation / notice_period: extract if mentioned; otherwise null
-- linked_in: only include if explicitly provided in the inputs; never fabricate
 - graduation_year: integer or null if unknown
 - If a field cannot be determined, use empty string for strings, [] for arrays, null for optional fields — never fabricate
 - Output ONLY the JSON object"""
@@ -293,7 +291,6 @@ async def agent0_extract(
     notice_period_form: str,
     salary_expectation_form: str,
     references_available_form: bool,
-    linked_in_form: str,
     candidate_id: str,
     is_internal: bool = False,
     position_title: str = "",
@@ -343,11 +340,6 @@ async def agent0_extract(
         if not already_present:
             llm_achievements.insert(0, biggest_achievement.strip())
 
-    # Form fields take precedence
-    linked_in_final: str | None = (
-        linked_in_form.strip() if linked_in_form and linked_in_form.strip() else raw.get("linked_in")
-    )
-
     return CandidateProfile(
         id=candidate_id,
         name=name,
@@ -375,7 +367,6 @@ async def agent0_extract(
         salary_expectation=salary_expectation_form.strip() or raw.get("salary_expectation"),
         notice_period=notice_period_form.strip() or raw.get("notice_period"),
         references_available=references_available_form,
-        linked_in=linked_in_final,
     )
 
 
