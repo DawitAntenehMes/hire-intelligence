@@ -15,6 +15,7 @@
         <span class="nav-logo">HI</span>
         <span class="nav-title">Hire Intelligence</span>
       </div>
+      <a href="/apply.html" style="font-size:13px;font-weight:500;color:var(--blue);text-decoration:none;padding:6px 12px;border:1px solid var(--blue-lt);border-radius:20px;background:var(--blue-lt);">+ Submit Application</a>
       <div class="nav-steps">
         <div class="step active" id="step-1">
           <span class="step-num">1</span>
@@ -43,29 +44,64 @@
 
     <div class="setup-grid">
 
-      <!-- JD INPUT -->
+      <!-- JD MANAGEMENT -->
       <div class="card full-width">
         <div class="card-header">
           <div class="card-icon blue">JD</div>
           <div>
-            <h2 class="card-title">Job Description</h2>
-            <p class="card-desc">Paste the full role description below</p>
+            <h2 class="card-title">Positions (Job Descriptions)</h2>
+            <p class="card-desc" id="jd-card-desc">Add and manage open positions for your company</p>
           </div>
-          <button class="btn-ghost" onclick="loadDefaultJD()">Load example JD</button>
+          <button class="btn-ghost" id="jd-add-btn" onclick="showJDForm()">+ Add Position</button>
         </div>
-        <textarea id="jd-input" class="jd-textarea" placeholder="Paste your job description here..."></textarea>
+
+        <!-- JD list -->
+        <div id="jd-list" class="jd-list">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- JD form (hidden by default) -->
+        <div id="jd-form-wrap" class="jd-form-wrap" style="display:none;">
+          <div class="jd-form-header">
+            <span id="jd-form-title">New Position</span>
+            <button class="btn-ghost jd-form-close" onclick="hideJDForm()">✕</button>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="jd-title-input">Position Title</label>
+            <input type="text" class="field-input" id="jd-title-input" placeholder="e.g. Director of Operations" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="jd-input">Job Description</label>
+            <textarea id="jd-input" class="jd-textarea" placeholder="Paste the full job description here..."></textarea>
+          </div>
+          <div class="jd-form-actions">
+            <button class="btn-primary" id="jd-save-btn" onclick="saveCurrentJD()">Save Position</button>
+            <button class="btn-ghost" onclick="loadDefaultJD()">Load example JD</button>
+            <button class="btn-ghost" onclick="hideJDForm()">Cancel</button>
+          </div>
+        </div>
       </div>
 
-      <!-- CANDIDATES -->
+      <!-- CANDIDATES (with position filter) -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon green">CV</div>
           <div>
             <h2 class="card-title">Candidates</h2>
-            <p class="card-desc">Select or load candidate profiles</p>
+            <p class="card-desc">Select up to 3 · double-click to view profile</p>
           </div>
-          <button class="btn-ghost" onclick="loadAllCandidates()">Load all 3</button>
+          <button class="btn-ghost" id="load-all-btn" onclick="loadAllCandidates()" disabled>Loading…</button>
         </div>
+        <!-- Position filter -->
+        <div class="position-filter" id="position-filter">
+          <label class="position-filter-label">Filter by position:</label>
+          <select id="position-filter-select" class="field-select" onchange="onPositionFilterChange(this.value)">
+            <option value="">All Positions</option>
+          </select>
+          <span class="position-filter-count" id="position-filter-count"></span>
+        </div>
+        <div class="candidate-counter" id="candidate-counter">0 / 3 selected</div>
+        <div id="candidate-limit-msg" class="candidate-limit-msg" style="display:none;"></div>
         <div class="candidate-list" id="candidate-list">
           <!-- Populated by JS -->
         </div>
@@ -76,8 +112,8 @@
         <div class="card-header">
           <div class="card-icon amber">SC</div>
           <div>
-            <h2 class="card-title">Business Scenario</h2>
-            <p class="card-desc">The current business context</p>
+            <h2 class="card-title">Business Scenario <span style="font-size:11px;font-weight:400;color:var(--gray-400);margin-left:4px;">(optional)</span></h2>
+            <p class="card-desc">The current business context that shapes this hire</p>
           </div>
         </div>
         <div class="scenario-grid" id="scenario-grid">
@@ -291,8 +327,18 @@
     </div>
   </main>
 
+  <!-- CANDIDATE PROFILE MODAL -->
+  <div class="profile-modal-overlay" id="profile-modal" onclick="closeProfileModal()">
+    <div class="profile-modal" onclick="event.stopPropagation()">
+      <div class="profile-modal-header">
+        <div class="profile-modal-title" id="profile-modal-title">Candidate Profile</div>
+        <button class="profile-modal-close" onclick="closeProfileModal()">&#x2715;</button>
+      </div>
+      <div class="profile-modal-body" id="profile-modal-body"></div>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
-  <script src="data/candidates.js"></script>
   <script src="data/scenarios.js"></script>
   <script src="data/jobDescription.js"></script>
   <script src="js/pipeline.js"></script>

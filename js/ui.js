@@ -18,23 +18,43 @@ function riskClass(level) {
 
 // ── Setup Screen ─────────────────────────────────────────────────────────────
 
-function renderCandidates(selectedIds = []) {
+function renderCandidates(selectedIds = [], candidatePool) {
+  const pool = candidatePool || CANDIDATES;
+  const atLimit = selectedIds.length >= 3;
+
+  // Update counter
+  const counter = document.getElementById("candidate-counter");
+  if (counter) counter.textContent = `${selectedIds.length} / 3 selected`;
+
   const list = document.getElementById("candidate-list");
-  list.innerHTML = CANDIDATES.map(c => `
-    <div class="candidate-chip ${selectedIds.includes(c.id) ? "selected" : ""}"
-         onclick="toggleCandidate('${c.id}')">
-      <div class="chip-check">${selectedIds.includes(c.id) ? "✓" : ""}</div>
+  if (!pool.length) {
+    list.innerHTML = '<div class="empty-pool">No candidates found for this filter.</div>';
+    return;
+  }
+  list.innerHTML = pool.map(c => {
+    const isSelected = selectedIds.includes(c.id);
+    const isDisabled = atLimit && !isSelected;
+    const positionLabel = c.appliedPosition || (c.appliedToJobs && c.appliedToJobs.length ? c.appliedToJobs[0] : "");
+    return `
+    <div class="candidate-chip ${isSelected ? "selected" : ""} ${isDisabled ? "disabled" : ""}"
+         onclick="toggleCandidate('${c.id}')"
+         ondblclick="event.stopPropagation(); openProfileModal('${c.id}')">
+      <div class="chip-check">${isSelected ? "✓" : ""}</div>
       <div class="chip-avatar" style="background:${c.avatarColor}; color:${c.avatarText};">${c.initials}</div>
       <div class="chip-info">
         <div class="chip-name">${c.name}</div>
         <div class="chip-role">${c.currentRole}</div>
+        ${positionLabel
+        ? `<div class="chip-applied"><span class="chip-job-tag">${positionLabel.length > 30 ? positionLabel.slice(0, 30) + "…" : positionLabel}</span></div>`
+        : ""}
       </div>
       <div class="chip-tags">
         <span class="tag ${c.type}">${c.type}</span>
         <span class="tag weeks">${c.availabilityWeeks}w</span>
       </div>
-    </div>
-  `).join("");
+      <button class="chip-view-btn" title="View full profile" onclick="event.stopPropagation(); openProfileModal('${c.id}')">&#9432;</button>
+    </div>`;
+  }).join("");
 }
 
 function renderScenarios(selectedId = null) {
@@ -85,8 +105,8 @@ function renderPanelA(agent1) {
       <span class="criteria-col-label">Reasoning</span>
     </div>
     ${agent1.adaptedCriteria.map(c => {
-      const maxW = 60;
-      return `
+    const maxW = 60;
+    return `
         <div class="criteria-row">
           <span class="criteria-name">${c.criterion}</span>
           <div class="weight-bar-wrap">
@@ -98,7 +118,7 @@ function renderPanelA(agent1) {
           <span class="criteria-reasoning">${c.reasoning}</span>
         </div>
       `;
-    }).join("")}
+  }).join("")}
   `;
 
   // Build override sliders
@@ -183,8 +203,8 @@ function renderPanelB(agent2) {
 function renderPanelC(agent3) {
   const rankings = document.getElementById("rankings");
   rankings.innerHTML = agent3.candidates.map(c => `
-    <div class="rank-row rank-${c.rank}" id="rank-${c.name.replace(/\s+/g,"-")}">
-      <div class="rank-header" onclick="toggleRankDetail('${c.name.replace(/\s+/g,"-")}')">
+    <div class="rank-row rank-${c.rank}" id="rank-${c.name.replace(/\s+/g, "-")}">
+      <div class="rank-header" onclick="toggleRankDetail('${c.name.replace(/\s+/g, "-")}')">
         <span class="rank-number">#${c.rank}</span>
         <div>
           <div class="rank-name">${c.name}</div>
@@ -202,7 +222,7 @@ function renderPanelC(agent3) {
         <div class="dimension-bars">
           ${c.dimensionScores.map(d => `
             <div class="dim-row">
-              <span class="dim-name">${d.criterion.length > 20 ? d.criterion.slice(0,20) + "…" : d.criterion} (${d.weight}%)</span>
+              <span class="dim-name">${d.criterion.length > 20 ? d.criterion.slice(0, 20) + "…" : d.criterion} (${d.weight}%)</span>
               <div class="dim-bar-wrap">
                 <div class="dim-bar" style="width:${d.score}%; background:${scoreColor(d.score)};"></div>
               </div>
@@ -241,4 +261,40 @@ function renderDecision(result) {
     document.getElementById("red-flags-card").classList.remove("hidden");
     document.getElementById("red-flags-list").innerHTML = a4.redFlags.map(f => `<li>${f}</li>`).join("");
   }
+}
+
+// ── JD List ───────────────────────────────────────────────────────────────────
+
+function renderJDList() {
+  const jds = loadSavedJDs();
+  const list = document.getElementById("jd-list");
+  if (!list) return;
+
+  if (!jds.length) {
+    list.innerHTML = '<div class="jd-empty">No positions added yet. Click <strong>+ Add Position</strong> to create one.</div>';
+    return;
+  }
+
+  list.innerHTML = jds.map(j => {
+    const isActive = state.selectedPosition === j.id;
+    const preview = j.text.replace(/\n/g, " ").slice(0, 120);
+    const candidateCount = CANDIDATES.filter(c =>
+      c.appliedPosition === j.title || (c.appliedToJobs && c.appliedToJobs.includes(j.title))
+    ).length;
+    return `
+    <div class="jd-card ${isActive ? "jd-card-active" : ""}" onclick="selectPositionForPipeline('${j.id}')">
+      <div class="jd-card-main">
+        <div class="jd-card-title">${j.title}</div>
+        <div class="jd-card-preview">${preview}${j.text.length > 120 ? "…" : ""}</div>
+        <div class="jd-card-meta">
+          <span class="jd-card-candidates">${candidateCount} applicant${candidateCount !== 1 ? "s" : ""}</span>
+          ${isActive ? '<span class="jd-card-selected-badge">Selected for pipeline</span>' : ""}
+        </div>
+      </div>
+      <div class="jd-card-actions" onclick="event.stopPropagation()">
+        <button class="btn-ghost btn-sm" onclick="showJDForm('${j.id}')" title="Edit">✎</button>
+        <button class="btn-ghost btn-sm btn-danger" onclick="deleteJD('${j.id}')" title="Delete">✕</button>
+      </div>
+    </div>`;
+  }).join("");
 }

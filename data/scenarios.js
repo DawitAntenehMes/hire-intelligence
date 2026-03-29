@@ -2,23 +2,28 @@
 
 const SCENARIOS = [
   {
-    id: "SC01",
-    label: "Stable Operations",
-    description: "BMW's supply chain is operating normally. Focus is on long-term strategic partnership development, cost optimisation, and EV transition planning. The role requires strong strategic leadership, relationship building with key suppliers, and digital transformation capability across the DACH region."
+    id: "BOOM",
+    label: "Rapid Growth",
+    description: "The organisation is in a hypergrowth phase — revenue or headcount doubling, entering new markets, or integrating a recent acquisition. Speed of execution, scalability mindset, and the ability to build teams and systems from scratch are critical. Trade-offs between quality and velocity will need to be navigated frequently."
   },
   {
-    id: "SC02",
-    label: "Supply Chain Crisis",
-    description: "A semiconductor shortage and logistics disruption are causing production halts across DACH plants. Immediate vendor renegotiation, alternative sourcing activation, and cross-functional crisis coordination are the primary requirements. Speed, resilience, and operational decisiveness outweigh long-term strategic skills."
+    id: "CRISIS",
+    label: "Operational Crisis",
+    description: "The organisation is managing an active disruption — a supply chain failure, a technology outage, a reputational incident, a regulatory breach, or a financial emergency. The role must stabilise operations immediately, make fast decisions under uncertainty, and communicate clearly with stakeholders under pressure."
   },
   {
-    id: "SC03",
-    label: "EV Platform Launch",
-    description: "BMW is launching its next-generation EV platform within 18 months. Battery supply, new supplier relationships, and digital supply chain infrastructure are the critical capabilities. The role demands deep EV supply chain knowledge, the ability to build new partnerships rapidly, and comfort operating in greenfield environments."
+    id: "RESTRUCTURE",
+    label: "Restructuring / Merger",
+    description: "The organisation is undergoing significant structural change — a merger, acquisition, spin-off, or internal reorganisation. The role requires strong change-management skills, political savvy, the ability to align disparate teams, and comfort with ambiguity as reporting lines and responsibilities shift."
   },
   {
-    id: "SC04",
-    label: "Cost Restructuring",
-    description: "A board-directed 20% cost reduction programme is underway. The role requires lean operations expertise, supplier consolidation capability, and disciplined cost-out programme delivery. Long-term growth orientation is secondary to rigorous cost governance and efficiency delivery under board scrutiny."
-  }
+    id: "COST_CUT",
+    label: "Cost Reduction",
+    description: "The organisation is under financial pressure and running an efficiency programme — headcount rationalisation, vendor renegotiations, process automation, or budget cuts. The role needs to deliver results with fewer resources, identify waste, and maintain morale while implementing difficult changes."
+  },
+  {
+    id: "SCALE",
+    label: "Scaling / IPO Prep",
+    description: "The organisation is maturing and preparing for significant scale — an IPO, a major funding round, enterprise-level sales, or global expansion. The role requires the ability to professionalise operations, implement governance and controls, attract top-tier talent, and transition the company from startup informality to institutional readiness."
+  },
 ];

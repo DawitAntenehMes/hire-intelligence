@@ -109,3 +109,6 @@ All 4 agents call `grok-2-latest` via Grok's OpenAI-compatible API. The pipeline
 - Human always decides — every output has an override button
 - Transparent reasoning — every score has a one-sentence evidence statement
 - Full audit trail — every run logs scenario, weights, scores, and final decision
+
+
+python -m uvicorn main:app --reload --port 3001
