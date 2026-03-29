@@ -1,39 +1,40 @@
 // data/jobDescription.js
 
-const DEFAULT_JD = `Head of Supply Chain — DACH Region
-BMW Group | Munich, Germany
+const DEFAULT_JD = `Director of Operations
 
-ROLE OVERVIEW
-The Head of Supply Chain for the DACH Region is responsible for end-to-end supply chain performance across Germany, Austria, and Switzerland. This is a senior leadership role reporting to the Global Chief Supply Chain Officer, with full P&L responsibility for the DACH supply function.
+About the Role
+We are looking for an experienced Director of Operations to lead and optimise our end-to-end operational functions. This is a senior leadership role reporting directly to the CEO, responsible for driving operational excellence, scaling processes, and ensuring the organisation executes on its strategic priorities.
 
-KEY RESPONSIBILITIES
-- Lead strategic supplier partnerships and long-term supply agreements across the DACH region
-- Drive cost optimisation programmes achieving annual savings targets
-- Oversee crisis response and supply continuity planning
-- Direct a team of 120+ supply chain professionals across three countries
-- Partner with EV programme teams to build battery supply capability
-- Lead digital transformation of supply chain visibility and forecasting tools
+Key Responsibilities
+- Own the full operational portfolio including supply chain, production, logistics, and vendor management
+- Design and implement scalable processes and systems that support business growth
+- Lead cross-functional projects and ensure delivery against milestones, budgets, and quality standards
+- Manage and develop a team of 15–40 operational staff across multiple functions and locations
+- Build and maintain relationships with key external partners, suppliers, and service providers
+- Drive continuous improvement initiatives using data-driven methodologies (Lean, Six Sigma, or equivalent)
+- Collaborate with Finance, Sales, HR, and Product teams to align operations with company goals
+- Report operational KPIs to the executive team and board; own P&L for operational cost centres
+- Ensure compliance with relevant regulatory, safety, and quality standards
 
-CORE CRITERIA AND WEIGHTS
-The following criteria define success in this role. Initial weights reflect stable operating conditions.
+Required Experience & Skills
+- 8+ years of progressive operations experience, with at least 3 years in a senior or director-level role
+- Proven track record of leading large, cross-functional teams through periods of growth or transformation
+- Strong analytical skills with experience using data to diagnose problems and drive decisions
+- Excellent communication and stakeholder management skills at all levels
+- Experience managing supplier negotiations and vendor relationships
+- Demonstrated ability to implement and scale operational processes
+- Comfortable operating in fast-paced, ambiguous environments
 
-1. Strategic Planning & Long-term Vision — 30%
-   Ability to define and execute multi-year supply strategy aligned with BMW's electrification roadmap.
+Nice to Have
+- Experience with ERP systems (SAP, Oracle, or equivalent)
+- Background in a relevant industry (manufacturing, logistics, technology, or professional services)
+- MBA or equivalent advanced degree
+- Certifications in project management (PMP) or process improvement (Lean, Six Sigma)
 
-2. Leadership Experience — 25%
-   Track record leading large, cross-functional supply chain organisations (100+ people, multi-country).
-
-3. Stakeholder Management — 20%
-   Effectiveness in managing C-suite relationships, board reporting, and cross-functional alignment.
-
-4. Digital Fluency — 15%
-   Demonstrated capability with supply chain digitalisation, SAP S/4HANA, and data-driven decision making.
-
-5. Crisis Operations — 10%
-   Ability to manage supply disruptions, rapid vendor renegotiation, and production continuity under pressure.
-
-REQUIREMENTS
-- 10+ years of senior supply chain leadership in automotive or adjacent manufacturing
-- Proven experience managing multi-country operations
-- Fluent in German and English
-- Based in or willing to relocate to Munich`;
+What We Offer
+- Competitive salary and performance bonus
+- Equity participation
+- Full benefits package
+- Flexible working arrangements
+- A high-impact role with real ownership and visibility at the executive level
+`;

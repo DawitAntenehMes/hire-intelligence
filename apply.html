@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Hire Intelligence</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    /* Page-specific overrides */
+    .apply-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .apply-header {
+      margin-bottom: 32px;
+    }
+
+    .apply-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .apply-header p {
+      color: var(--gray-500);
+      font-size: 14px;
+    }
+
+    .apply-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-label .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .icon-blue  { background: var(--blue-lt);  color: var(--blue); }
+    .icon-green { background: var(--green-lt); color: var(--green); }
+    .icon-amber { background: var(--amber-lt); color: var(--amber); }
+
+    .section-label h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin: 0;
+    }
+
+    .section-label p {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin: 0;
+    }
+
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+
+    .field-label .optional {
+      font-weight: 400;
+      color: var(--gray-400);
+      margin-left: 4px;
+    }
+
+    .field-input, .field-textarea, .field-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-family: var(--font);
+      color: var(--gray-800);
+      background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .field-input:focus, .field-textarea:focus, .field-select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(28, 105, 212, 0.12);
+    }
+
+    .field-textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.55;
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 5px;
+    }
+
+    .file-drop {
+      border: 2px dashed var(--gray-300);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .file-drop:hover, .file-drop.drag-over {
+      border-color: var(--blue);
+      background: var(--blue-lt);
+    }
+
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-drop-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gray-100);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .file-drop-icon svg { color: var(--gray-400); }
+
+    .file-drop-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 4px;
+    }
+
+    .file-drop-sub {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .file-selected {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--green-lt);
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius);
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .file-selected.visible { display: flex; }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-row span {
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+
+    .privacy-note {
+      font-size: 12px;
+      color: var(--gray-400);
+      padding: 10px 12px;
+      background: var(--gray-50);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--gray-200);
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 540px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* Submit bar */
+    .submit-bar {
+      position: sticky;
+      bottom: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 -24px -80px;
+    }
+
+    .submit-hint {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* State: loading */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(249,250,251,0.92);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .loading-overlay.visible { display: flex; }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    .loading-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* State: success */
+    .success-card {
+      display: none;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      margin-top: 24px;
+    }
+
+    .success-card.visible { display: block; }
+
+    .success-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .success-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--green-lt);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .success-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    .success-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+
+    .profile-field {
+      padding: 10px 12px;
+      background: var(--gray-50);
+      border-radius: var(--radius);
+    }
+
+    .profile-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-400);
+      margin-bottom: 2px;
+    }
+
+    .profile-field-value {
+      font-size: 13px;
+      color: var(--gray-800);
+      font-weight: 500;
+    }
+
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .error-banner {
+      display: none;
+      padding: 12px 16px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius);
+      color: var(--coral);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .error-banner.visible { display: block; }
+
+    /* Active job banner */
+    .active-job-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--blue-lt);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+    }
+    .active-job-banner-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 14px;
+    }
+    .active-job-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      margin-bottom: 2px;
+    }
+    .active-job-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="nav-logo">HI</span>
+        <span class="nav-title">Hire Intelligence</span>
+      </div>
+      <a href="/" style="font-size:13px;color:var(--gray-500);text-decoration:none;">← Back to Pipeline</a>
+    </div>
+  </nav>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-title">Analysing your CV…</div>
+    <div class="loading-sub">Our AI is extracting your profile. This takes 10–20 seconds.</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="apply-wrap">
+    <div class="apply-header">
+      <h1>Submit Your Application</h1>
+      <p>Upload your CV and answer a few short questions. Our AI will build your candidate profile automatically.</p>
+    </div>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <!-- FORM -->
+    <form id="apply-form" novalidate>
+
+      <!-- POSITION SELECTOR -->
+      <div class="apply-section">
+        <div class="section-label">
+          <div class="icon icon-blue">JD</div>
+          <div>
+            <h2>Position</h2>
+            <p>Which role are you applying for?</p>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="position-select">Select a position <span style="color:var(--coral);">*</span></label>
+          <select class="field-select" id="position-select" name="position_title" required>
+            <option value="">— Choose a position —</option>
+          </select>
+          <div class="field-hint" id="position-hint">Positions are loaded from the hiring dashboard.</div>
+        </div>
+      </div>
+
+      <!-- CV UPLOAD -->
+      <div class="apply-section">
+        <div class="section-label">
+          <div class="icon icon-blue">CV</div>
+          <div>
+            <h2>Your CV</h2>
+            <p>PDF or Word document, max 10 MB</p>
+          </div>
+        </div>
+
+        <div class="file-drop" id="file-drop">
+          <input type="file" id="cv-file" name="cv_file" accept=".pdf,.docx" required />
+          <div class="file-drop-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <div class="file-drop-title">Drop your CV here or click to browse</div>
+          <div class="file-drop-sub">PDF or DOCX · Max 10 MB</div>
+        </div>
+        <div class="file-selected" id="file-selected">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span id="file-name-display"></span>
+        </div>
+      </div>
+
+      <!-- FULL NAME -->
+      <div class="apply-section">
+        <div class="section-label">
+          <div class="icon icon-blue">You</div>
+          <div>
+            <h2>Your Name</h2>
+            <p>As it appears on your CV</p>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="full-name">Full name</label>
+          <input
+            type="text"
+            class="field-input"
+            id="full-name"
+            name="full_name"
+            placeholder="e.g. Jane Smith"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- SCREENING QUESTIONS -->
+      <div class="apply-section">
+        <div class="section-label">
+          <div class="icon icon-green">Q&amp;A</div>
+          <div>
+            <h2>Screening Questions</h2>
+            <p>Your answers are used to personalise the evaluation</p>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="why-best-suited">
+            Why are you best suited for this role?
+          </label>
+          <textarea
+            class="field-textarea"
+            id="why-best-suited"
+            name="why_best_suited"
+            placeholder="Describe the specific experience, skills, or perspective that makes you the right fit…"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="biggest-achievement">
+            What is your most relevant professional achievement?
+          </label>
+          <textarea
+            class="field-textarea"
+            id="biggest-achievement"
+            name="biggest_achievement"
+            placeholder="Describe a result you are proud of, with numbers if possible…"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="leadership-approach">
+            How would you describe your leadership approach?
+          </label>
+          <textarea
+            class="field-textarea"
+            id="leadership-approach"
+            name="leadership_approach"
+            placeholder="How do you lead teams, handle conflict, or drive change in an organisation?"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- ADDITIONAL DETAILS -->
+      <div class="apply-section">
+        <div class="section-label">
+          <div class="icon icon-amber">+</div>
+          <div>
+            <h2>Additional Details</h2>
+            <p>Optional — helps give a complete picture</p>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label class="field-label" for="notice-period">
+              Notice period <span class="optional">(optional)</span>
+            </label>
+            <input
+              type="text"
+              class="field-input"
+              id="notice-period"
+              name="notice_period"
+              placeholder="e.g. 3 months"
+            />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="salary-expectation">
+              Salary expectation <span class="optional">(optional)</span>
+            </label>
+            <input
+              type="text"
+              class="field-input"
+              id="salary-expectation"
+              name="salary_expectation"
+              placeholder="e.g. €120k–€140k"
+            />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="linked-in">
+            LinkedIn profile URL <span class="optional">(optional)</span>
+          </label>
+          <input
+            type="url"
+            class="field-input"
+            id="linked-in"
+            name="linked_in"
+            placeholder="https://linkedin.com/in/your-profile"
+          />
+          <div class="privacy-note">
+            Your LinkedIn URL is optional and will only be used by the hiring team. It will not be shared beyond this process.
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="references-available" name="references_available" />
+            <span>I can provide professional references upon request</span>
+          </label>
+        </div>
+
+        <div class="field-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="is-internal-checkbox"
+                   onchange="document.getElementById('is-internal-flag').value = this.checked.toString()" />
+            <span>I am applying as an <strong>internal employee</strong> (currently employed here)</span>
+          </label>
+          <input type="hidden" id="is-internal-flag" name="is_internal" value="false" />
+        </div>
+      </div>
+
+      <!-- SUCCESS CARD (shown after submit) -->
+      <div class="success-card" id="success-card">
+        <div class="success-header">
+          <div class="success-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div>
+            <div class="success-title">Application received</div>
+            <div class="success-sub">Your profile has been extracted and added to the candidate pool.</div>
+          </div>
+        </div>
+        <div id="profile-preview"></div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- SUBMIT BAR -->
+  <div class="submit-bar">
+    <span class="submit-hint" id="submit-hint">Fill in all required fields to submit</span>
+    <button class="btn-primary" id="submit-btn" type="submit" form="apply-form" disabled>
+      Submit Application
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <script src="js/apply.js"></script>
+</body>
+</html>
