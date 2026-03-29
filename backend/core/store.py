@@ -87,6 +87,15 @@ class CandidateStore:
         with self._lock:
             return self._store.get(candidate_id)
 
+    def remove(self, candidate_id: str) -> bool:
+        """Delete a candidate by id. Returns True if found and removed."""
+        with self._lock:
+            if candidate_id not in self._store:
+                return False
+            del self._store[candidate_id]
+            self._save()
+        return True
+
     def count(self) -> int:
         with self._lock:
             return len(self._store)

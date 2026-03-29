@@ -53,6 +53,7 @@ function renderCandidates(selectedIds = [], candidatePool) {
         <span class="tag weeks">${c.availabilityWeeks}w</span>
       </div>
       <button class="chip-view-btn" title="View full profile" onclick="event.stopPropagation(); openProfileModal('${c.id}')">&#9432;</button>
+      <button class="chip-delete-btn" title="Remove candidate" onclick="event.stopPropagation(); deleteCandidate('${c.id}')">&#x2715;</button>
     </div>`;
   }).join("");
 }

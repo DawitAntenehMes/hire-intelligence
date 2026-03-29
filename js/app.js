@@ -223,6 +223,7 @@ async function fetchCandidates() {
   }
   renderFilteredCandidates();
   updatePositionFilter();
+  renderJDList();
   const loadAllBtn = document.getElementById("load-all-btn");
   if (loadAllBtn) {
     loadAllBtn.textContent = CANDIDATES.length
@@ -319,6 +320,32 @@ function loadAllCandidates() {
   if (!filtered.length) return;
   state.selectedCandidates = filtered.slice(0, MAX_CANDIDATES).map(c => c.id);
   renderFilteredCandidates();
+  checkRunReady();
+}
+
+async function deleteCandidate(id) {
+  const candidate = CANDIDATES.find(c => c.id === id);
+  const name = candidate ? candidate.name : "this candidate";
+  if (!confirm(`Remove ${name} from the system? This cannot be undone.`)) return;
+
+  try {
+    const res = await fetch(`/api/candidates/${id}`, { method: "DELETE" });
+    if (!res.ok && res.status !== 404) throw new Error(`HTTP ${res.status}`);
+  } catch (err) {
+    alert("Failed to delete candidate. Please try again.");
+    return;
+  }
+
+  // Remove from local array
+  const idx = CANDIDATES.findIndex(c => c.id === id);
+  if (idx !== -1) CANDIDATES.splice(idx, 1);
+
+  // Deselect if selected
+  const sel = state.selectedCandidates.indexOf(id);
+  if (sel !== -1) state.selectedCandidates.splice(sel, 1);
+
+  renderFilteredCandidates();
+  renderJDList();
   checkRunReady();
 }
 
